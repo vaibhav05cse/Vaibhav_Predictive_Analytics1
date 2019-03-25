@@ -1,0 +1,13 @@
+After collecting all the fetaures, the next process is to identify which are the input features in the data set are how much significant to the dependent variable.
+In my case, i have collected the historical values of 10 important features which affect the price of a stock.
+In the second phase of my project, i will try to predict the day's closing price of the stock based on these 10 input features.
+In round-1, i will build a multiple linear regression model through which i will predict the day's closing price of Infosys's stock.
+Before procceding to the training phase, we must find the best features to build a model.
+To build a model, there are several methods used. Out of those methods, i prefer the BACKWARD ELIMINATION method.
+BACKWARD ELIMINATION is based on the p-value and the signification level(SL) of the variable.
+Following are the steps of BACKWARD ELIMINATION:-
+	i. Select the signification level; prefer to have a significance level of 5% (SL<=0.05)
+	ii. Fit the full model with the entire set of attributes.
+	iii. If for any attribute, p>SL (p-value is more than the significance level), then drop this attrubute. and go to step ii.
+	iv. Else, FInalize the model.
+	
