@@ -25,6 +25,7 @@ regressor.fit(X_train, y_train)
 #Making preictions
 y_pred=regressor.predict(X_test)
 
+#Correlation between actual value and predicted values
 sim = np.corrcoef(y_test, y_pred)
 
 #Visualizing the performance on test data
