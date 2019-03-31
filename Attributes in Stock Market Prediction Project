@@ -1,0 +1,14 @@
+I have taken the following attributes:-
+Input attributes:-
+SENSEX - BSE Sensex Index value
+NIFTY 50 - NSE Nifty 50 Index Value
+ST_52_High - Stock's 52 weeks highest price
+ST_52_Low - Stock's 52 weeks lowest price
+PREV_CLOSE - Previous day closing price of the stock
+DOLLAR - Current Dollar to INR rate
+CRUDE - Current crude oil price
+HANG_SENG - Hang Seng Index
+DAX - Dow Jones Index
+SENT_SCR - Market sentiment score
+Output attribute:-
+DAY_CLOSE - Day closing price of the stock
