@@ -1,0 +1,49 @@
+#Importing Libraries
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+
+# Importing dataset
+dataset = pd.read_csv('data13.csv')
+
+#Making independednt and dependent variables
+X = dataset.iloc[:, :-1].values
+y = dataset.iloc[:, 10].values
+
+
+# Splitting the dataset into the training set and test set (test set is 20%)
+from sklearn.cross_validation import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
+
+
+#Fitting linear regression model
+from sklearn.linear_model import LinearRegression
+regressor=LinearRegression()
+regressor.fit(X_train, y_train)
+
+#Making preictions
+y_pred=regressor.predict(X_test)
+
+sim = np.corrcoef(y_test, y_pred)
+
+#Visualizing the performance on test data
+plt.plot(y_test, y_pred, color='blue')
+plt.title('Predicted Vs Actual')
+plt.xlabel('Actual')
+plt.ylabel('Predicted')
+plt.show()
+
+#Building the regression model using BACKWARD ELIMINATION; Iteration-1
+import statsmodels.formula.api as sm
+X = np.append(arr = np.ones((493,1)).astype(int), values = X, axis = 1)
+X_fitted = X[:,[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]]
+regressor_fitted = sm.fit(endog = y, exog = X_fitted).fit()
+regressor_fitted.summary()
+
+#Building the regression model using BACKWARD ELIMINATION; Iteration-2
+import statsmodels.formula.api as sm
+X = np.append(arr = np.ones((493,1)).astype(int), values = X, axis = 1)
+X_fitted = X[:,[0, 1, 2, 3, 4, 5, 7, 8, 9, 10]]
+regressor_fitted = sm.fit(endog = y, exog = X_fitted).fit()
+regressor_fitted.summary()
