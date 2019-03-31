@@ -34,17 +34,3 @@ plt.title('Predicted Vs Actual')
 plt.xlabel('Actual')
 plt.ylabel('Predicted')
 plt.show()
-
-#Building the regression model using BACKWARD ELIMINATION; Iteration-1
-import statsmodels.formula.api as sm
-X = np.append(arr = np.ones((493,1)).astype(int), values = X, axis = 1)
-X_fitted = X[:,[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]]
-regressor_fitted = sm.fit(endog = y, exog = X_fitted).fit()
-regressor_fitted.summary()
-
-#Building the regression model using BACKWARD ELIMINATION; Iteration-2
-import statsmodels.formula.api as sm
-X = np.append(arr = np.ones((493,1)).astype(int), values = X, axis = 1)
-X_fitted = X[:,[0, 1, 2, 3, 4, 5, 7, 8, 9, 10]]
-regressor_fitted = sm.fit(endog = y, exog = X_fitted).fit()
-regressor_fitted.summary()
