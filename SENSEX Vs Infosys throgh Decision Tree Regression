@@ -1,0 +1,51 @@
+#Importing Libraries
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Importing dataset
+dataset = pd.read_csv('data132.csv')
+
+#Making independednt and dependent variables
+X = dataset.iloc[:, :-1].values
+y = dataset.iloc[:, 1].values
+
+
+# Splitting the dataset into the training set and test set (test set is 20%)
+from sklearn.cross_validation import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
+
+#Fitting Decision Tree Regression Model
+from sklearn.tree import DecisionTreeRegressor
+regressor = DecisionTreeRegressor()
+regressor.fit(X_train, y_train)
+
+#Making preictions
+y_pred = regressor.predict(X_test)
+y_pred2 = regressor.predict(25590.7)
+
+#Visualizing the performance on training data
+plt.scatter(X_train, y_train, color='red')
+plt.plot(X_train, regressor.predict(X_train), color='blue')
+plt.title('SENSEX vs Infosys Through Decison Tree (Training Set)')
+plt.xlabel('SENSEX')
+plt.ylabel('Infosys')
+plt.show()
+
+#Visualizing the performance on test data
+plt.scatter(y_test, y_pred, color='red')
+plt.plot(y_test, regressor.predict(X_test), color='blue')
+plt.title('SENSEX vs Infosys Through Decison Tree (Test Set)')
+plt.xlabel('SENSEX')
+plt.ylabel('Infosys')
+plt.show()
+
+# Visualising the Decision Tree Regression results (In a high resolution)
+X_grid = np.arange(min(X_test), max(X_test), 0.01)
+X_grid = X_grid.reshape((len(X_grid), 1))
+plt.scatter(X_test, y_test, color = 'red')
+plt.plot(X_grid, regressor.predict(X_grid), color = 'blue')
+plt.title('SENSEX vs Infosys Through Decison Tree (Test Set)')
+plt.xlabel('SENSEX')
+plt.ylabel('Infosys')
+plt.show()
