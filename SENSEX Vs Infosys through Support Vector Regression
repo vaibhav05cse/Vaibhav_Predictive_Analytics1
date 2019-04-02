@@ -1,0 +1,49 @@
+#Importing Libraries
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Importing dataset
+dataset = pd.read_csv('data132.csv')
+
+#Making independednt and dependent variables
+X = dataset.iloc[:, :-1].values
+y = dataset.iloc[:, 1].values
+
+
+# Splitting the dataset into the training set and test set (test set is 20%)
+from sklearn.cross_validation import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
+
+#Feature Scaling (A Must when using SVR; not necessary in Regression in Python)
+from sklearn.preprocessing import StandardScaler
+X_sc = StandardScaler()
+X_train = X_sc.fit_transform(X_train)
+X_test = X_sc.fit_transform(X_test)
+y_sc = StandardScaler()
+y_train = y_train.reshape(-1, 1)
+y_train = y_sc.fit_transform(y_train)
+
+#Fitting SVR (Support Vector Regression) model with Gaussian Radial Basis Gunction (RBF) as a Kernel
+from sklearn.svm import SVR
+regressor = SVR(kernel = 'rbf')
+regressor.fit(X_train, y_train)
+
+#Making preictions
+y_pred = y_sc.inverse_transform(regressor.predict(X_test))
+
+#Visualizing the performance on training data
+plt.scatter(X_train, y_train, color='red')
+plt.plot(X_train, regressor.predict(X_train), color='blue')
+plt.title('SENSEX vs Infosys (Training Set)')
+plt.xlabel('SENSEX')
+plt.ylabel('Infosys')
+plt.show()
+
+#Visualizing the performance on test data
+plt.scatter(y_test, y_pred, color='red')
+plt.plot(y_test, y_sc.inverse_transform(regressor.predict(X_test)), color='blue')
+plt.title('SENSEX vs Infosys (Training Set)')
+plt.xlabel('SENSEX')
+plt.ylabel('Infosys')
+plt.show()
