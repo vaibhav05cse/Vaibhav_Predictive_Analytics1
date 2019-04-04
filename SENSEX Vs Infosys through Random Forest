@@ -1,0 +1,34 @@
+#Importing Libraries
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Importing dataset
+dataset = pd.read_csv('data132.csv')
+
+#Making independednt and dependent variables
+X = dataset.iloc[:, :-1].values
+y = dataset.iloc[:, 1].values
+
+
+# Splitting the dataset into the training set and test set (test set is 20%)
+from sklearn.cross_validation import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
+
+#Fitting Random Forest Regression Model
+from sklearn.ensemble import RandomForestRegressor
+regressor = RandomForestRegressor(n_estimators = 1000)
+regressor.fit(X_train, y_train)
+
+#Making predictions
+y_pred = regressor.predict(X_test2)
+
+# Visualising the Random Forest Regression results
+X_grid = np.arange(min(X_test), max(X_test), 0.1)
+X_grid = X_grid.reshape((len(X_grid), 1))
+plt.scatter(X_test y_test, color = 'red')
+plt.plot(X_grid, regressor.predict(X_grid), color = 'blue')
+plt.title('SENSEX vs Infosys Through Random Forest')
+plt.xlabel('SENSEX')
+plt.ylabel('Infosys')
+plt.show()
